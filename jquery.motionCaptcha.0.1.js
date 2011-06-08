@@ -10,6 +10,13 @@
  * 
  * Incoporates other open source projects, attributed below.
  */
+
+var language_will_be = "English"; //English, Hebrew supported. Check the 'MotionCAPTCHA_language' function for the texts
+var errorMsg_lang;
+var successMsg_lang;
+var noCanvasMsg_lang;
+var label_lang;
+ 
 jQuery.fn.motionCaptcha || (function($) {
 	
 	/**
@@ -248,14 +255,14 @@ jQuery.fn.motionCaptcha || (function($) {
 		canvasTextColor: '#111',
 		
 		// These messages are displayed inside the canvas after a user finishes drawing:
-		errorMsg: 'Please try again.',
-		successMsg: 'Captcha passed!',
+		errorMsg: errorMsg_lang,
+		successMsg: successMsg_lang,
 		
 		// This message is displayed if the user's browser doesn't support canvas:
-		noCanvasMsg: "Your browser doesn't support <canvas> - try Chrome, FF4, Safari or IE9.",
+		noCanvasMsg: noCanvasMsg_lang,
 		
 		// This could be any HTML string (eg. '<label>Draw this shit yo:</label>'):
-		label: '<p>Please draw the shape in the box to submit the form:</p>',
+		label: label_lang,
 		
 		// Callback function to execute when a user successfully draws the shape
 		// Passed in the form, the canvas and the canvas context
@@ -626,6 +633,38 @@ jQuery.fn.motionCaptcha || (function($) {
 		var dx = p2.X - p1.X,
 			dy = p2.Y - p1.Y;
 		return Math.sqrt(dx * dx + dy * dy);
+	}
+	
+	function MotionCAPTCHA_language () {
+		
+		switch (language_will_be) {
+			
+			case "English":
+				// These messages are displayed inside the canvas after a user finishes drawing:
+				errorMsg_lang = "Please try again.";
+				successMsg_lang = "Captcha passed!";
+				// This message is displayed if the user's browser doesn't support canvas:
+				noCanvasMsg_lang = "Your browser doesn't support <canvas> - try Chrome, FF4, Safari or IE9.";
+				// This could be any HTML string (eg. '<label>Draw this shit yo:</label>'):
+				label_lang = "<p>Please draw the shape in the box to submit the form:</p>";
+				break;
+				
+			case 'Hebrew':
+				// These messages are displayed inside the canvas after a user finishes drawing:
+				errorMsg_lang = "אנא נסה שוב";
+				successMsg_lang = "הבדיקה עברה בהצלחה!";
+				// This message is displayed if the user's browser doesn't support canvas:
+				noCanvasMsg_lang = "הדפדפן שלך אינו תומך <canvas> - אנא נסה כרום, פיירפוקס ארבע, ספארי או אקספלורר תשע.";
+				// This could be any HTML string (eg. '<label>Draw this shit yo:</label>'):
+				label_lang = "<p>על מנת להמשיך, אנא צייר את הצורה אשר מוצגת בקופסא:</p>";
+				break;
+			
+		}
+		
+		}
+		
+	}
+	
 	}
 
 })(jQuery);
