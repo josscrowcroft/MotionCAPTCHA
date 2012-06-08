@@ -70,7 +70,20 @@ jQuery.fn.motionCaptcha || (function($) {
 			ctx.fillStyle = opts.canvasTextColor;
 			
 			// Set random shape
-			$canvas.addClass( opts.shapes[Math.floor(Math.random() * (opts.shapes.length) )] );
+			//$canvas.addClass( opts.shapes[Math.floor(Math.random() * (opts.shapes.length) )] );
+
+            $.get(
+                opts.preprocessor,
+                {
+                    uniqueid: $(opts.uniqueId).attr('value'),
+                    method: 'gettemplate'
+                },
+                function(data) {
+                    if (data != false) {
+                        $canvas.addClass(data);
+                    }
+                }
+            );
 			
 			// Set up Dollar Recognizer and drawing vars:
 			var _isDown = false,
@@ -150,6 +163,10 @@ jQuery.fn.motionCaptcha || (function($) {
 			
 			// Mouseup event:
 			var touchEndEvent = function(event) {
+
+                //$(opts.pointsId).attr('value', $(_points).serializeArray());
+                $(opts.pointsId).attr('value', JSON.stringify(_points));
+
 				// If mouse is down and canvas not locked:
 				if ( !locked && _isDown ) {
 					_isDown = false;
@@ -258,6 +275,9 @@ jQuery.fn.motionCaptcha || (function($) {
 	 * Exposed default plugin settings, which can be overridden in plugin call.
 	 */
 	$.fn.motionCaptcha.defaults = {
+        preprocessor: 'motionCaptcha.php',  // Ajax file, which gets a unique id and returns a shape
+        uniqueId: '#mc-unique',     // The hidden field with the unique id stamp
+        pointsId: '#mc-points',     // The hidden field which holds the points you are drawing
 		actionId: '#mc-action',     // The ID of the input containing the form action
 		divId: '#mc',               // If you use an ID other than '#mc' for the placeholder, pass it in here
 		canvasId: '#mc-canvas',     // The ID of the MotionCAPTCHA canvas element
