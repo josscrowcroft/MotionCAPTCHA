@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Motion CAPTCHA</title>
+    <link rel="stylesheet" href="jquery.motionCaptcha.0.2.css">
+</head>
+<body>
+
+<form action="motionCaptcha.php" method="post" id="demo-form">
+    <!--
+    This should of course be a unique number, fx with PHP <?php echo uniqid( hash("sha256", time()), TRUE ); ?>
+    -->
+    <input type="hidden" name="uniqueid" value="12345678" id="mc-unique" />
+    <input type="hidden" name="points" value="" id="mc-points" />
+    <fieldset>
+        <legend>Demo</legend>
+        <ul>
+            <li>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" />
+            </li>
+            <li>
+                <label for="comment">Comment</label>
+                <textarea name="comment" id="comment"></textarea>
+            </li>
+            <li>
+                <div id="mc">
+                    <p>Please draw the shape in the box to submit the form:</p>
+                    <canvas id="mc-canvas"></canvas>
+                </div>
+            </li>
+            <li>
+                <label for="submit">Send your comment!</label>
+                <input type="submit" name="submit" id="submit" disabled value="Send your comment" />
+            </li>
+        </ul>
+    </fieldset>
+</form>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="library/JSON-js/json2.js"></script>
+<script src="jquery.motionCaptcha.0.2.js"></script>
+<script>
+    $('#demo-form').motionCaptcha();
+</script>
+</body>
+</html>
