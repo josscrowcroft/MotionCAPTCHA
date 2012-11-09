@@ -111,5 +111,8 @@ In my book, all of these people are ace - I just borrowed from them and spliced 
             noCanvasMsg: "Your browser doesn't support <canvas> - try Chrome, FF4, Safari or IE9."
             
             // This could be any HTML string (eg. '<label>Draw this shit yo:</label>'):
-            label: '<p>Please draw the shape in the box to submit the form:</p>'
+            label: '<p>Please draw the shape in the box to submit the form:</p>',
+            
+            // message position on canvas
+            isRTL: false
         });

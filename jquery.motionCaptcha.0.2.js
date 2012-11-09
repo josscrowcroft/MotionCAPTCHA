@@ -65,6 +65,14 @@ jQuery.fn.motionCaptcha || (function($) {
 			ctx.canvasWidth = canvasWidth;
 			ctx.canvasHeight = canvasHeight;
 			
+			// msg position
+			msgX = opts.isRTL?
+				canvasWidth - 10 : 10;
+				
+			ctx.textAlign = opts.isRTL?
+				'right' : 'left';
+			
+			
 			// Set canvas context font and fillStyle:
 			ctx.font = opts.canvasFont;
 			ctx.fillStyle = opts.canvasTextColor;
@@ -304,7 +312,10 @@ jQuery.fn.motionCaptcha || (function($) {
 		onError: function($form, $canvas, ctx) {
 			var opts = this;
 			return;
-		}
+		},
+		
+		// msg postion (top right or top left)
+		isRTL: false
 	};
 	
 
