@@ -4,6 +4,9 @@ At the moment, it's just a proof-of-concept, (no IE support) but the next releas
 
 ### [Demo](http://josscrowcroft.com/demos/motioncaptcha/ "MotionCAPTCHA Demo") &bull; [Homepage / Screenshots](http://josscrowcroft.com/projects/motioncaptcha-jquery-plugin/ "MotionCAPTCHA - Joss Crowcroft") 
 
+> عبثت في كودها المصدري وجعلتها عربية
+> علي آل براك
+
 Don't try to use MotionCAPTCHA v0.2 in production - watch and wait for the full release!
 
 **Update 22-08-11:** For everyone who's been watching, my apologies for not updating you sooner. The response to MotionCATPCHA has been amazing, and I still have big plans for it, but work and other distractions got in the way - to everyone who still wants to see MotionCATPCHA become fully-fledged and being used on live sites and apps, watch out for a codesmash day in September (possibly the 10th!)
@@ -37,7 +40,6 @@ In my book, all of these people are ace - I just borrowed from them and spliced 
 
 ### v0.3
 * Try to fix up IE support via excanvas or similar library
-* Add a real functionality for a 'new shape' button (a shape-switcharoo method)
 
 ### v1.0
 * a) Combine with a simple PHP CAPTCHA and server-side checking script, for progressive enhancement. By default, form is submitted with regular CAPTCHA. On page load, if browser supports JavaScript and HTML5 Canvas, regular CAPTCHA is switched for mighty MotionCAPTCHA, and that would be checked on the server instead.
@@ -48,6 +50,9 @@ In my book, all of these people are ace - I just borrowed from them and spliced 
 
 
 ## Changelog
+
+### v0.2.1
+* Add a real functionality for a 'new shape' button (a shape-switcharoo method)
 
 ### v0.2
 * Added mobile support for current functionality. Should work in Android and iOS (iPhones/iPads) now.
@@ -70,8 +75,9 @@ In my book, all of these people are ace - I just borrowed from them and spliced 
 3. Add this placeholder `<div>` element to your form (NB. use `<fieldset>`s if you need it to validate) containing the blank canvas:
 
         <div id="mc">
-            <p>Please draw the shape in the box to submit the form:</p>
+            <p>الرجاء رسم الشكل لتثبت أنك إنسان:</p>
             <canvas id="mc-canvas"></canvas>
+            <a id="refresh"></a>
         </div>
 
 4. Disable the submit button, eg:
@@ -91,7 +97,13 @@ In my book, all of these people are ace - I just borrowed from them and spliced 
         // Or, if you just used 'mc-action' as the hidden input's ID:
         $('#form-id').motioncaptcha();
 
-7. Other options are available (defaults are shown):
+7. Activate the refresh button
+
+        $('#refresh').click(function(){
+        	 $('#form-id').motioncaptcha('shape-switcharoo');
+        });
+
+8. Other options are available (defaults are shown):
 
         $('#form-id').motioncaptcha({
             // Basics:
@@ -104,12 +116,12 @@ In my book, all of these people are ace - I just borrowed from them and spliced 
             shapes: ['triangle', 'x', 'rectangle', 'circle', 'check', 'caret', 'zigzag', 'arrow', 'leftbracket', 'rightbracket', 'v', 'delete', 'star', 'pigtail'],
             
             // These messages are displayed inside the canvas after a user finishes drawing:
-            errorMsg: 'Please try again.',
-            successMsg: 'Captcha passed!',
+			errorMsg : 'حوال مجددا.',
+			successMsg : 'لقد نجحت!',
             
             // This message is displayed if the user's browser doesn't support canvas:
-            noCanvasMsg: "Your browser doesn't support <canvas> - try Chrome, FF4, Safari or IE9."
+			noCanvasMsg : "متصفحك لا يدعم <canvas> - قوقل كروم، فاير فوكس 4، سفاري أو أنترنت أكسبلورر 9.",
             
             // This could be any HTML string (eg. '<label>Draw this shit yo:</label>'):
-            label: '<p>Please draw the shape in the box to submit the form:</p>'
+			label : '<p>أرسم الشكل لتثبت أنك أنسان:</p>'
         });
