@@ -294,6 +294,10 @@ jQuery.fn.motionCaptcha || (function($) {
 			
 			// Enable the submit button:
 			$submit.prop('disabled', false);
+
+			if ( $.mobile ) {
+				$submit.button('enable');
+			}
 			
 			return;
 		},
