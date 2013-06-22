@@ -33,6 +33,7 @@ jQuery.fn.motionCaptcha || (function($) {
 			opts.canvasId = '#' + opts.canvasId.replace(/\#/g, '');
 			opts.divId = '#' + opts.divId.replace(/\#/g, '');
 			opts.submitId = ( opts.submitId ) ? '#' + opts.submitId.replace(/\#/g, '') : false;
+			opts.btnRefresh = ( opts.btnRefresh ) ? '#' + opts.btnRefresh.replace(/\#/g, '') : false;
 
 			// Plugin setup:
 
@@ -44,7 +45,8 @@ jQuery.fn.motionCaptcha || (function($) {
 			var $body = $('body'),
 				$form = $(this),
 				$container = $(opts.divId),
-				$canvas = $(opts.canvasId);
+				$canvas = $(opts.canvasId),
+				$btnRefresh = $(opts.btnRefresh);
 			
 			// Set up MotionCAPTCHA canvas vars:
 			var canvasWidth = $canvas.width(),
@@ -206,11 +208,24 @@ jQuery.fn.motionCaptcha || (function($) {
 				return false;
 			}; // mouseup/touchend event
 
+			var refreshCaptcha = function(event) 
+			{
+				event.preventDefault();
+				$canvas.attr('class','');
+				$canvas.addClass( opts.shapes[Math.floor(Math.random() * (opts.shapes.length) )] );
+				ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+			};
+			
 			// Bind events to canvas:
 			$canvas.bind({
 				mousedown:  touchStartEvent,
 				mousemove: touchMoveEvent,
 				mouseup:  touchEndEvent,
+			});
+			
+			// Bind click event to refresh button
+			$btnRefresh.bind({
+				click: refreshCaptcha
 			});
 
 			// Mobile touch events:
@@ -261,7 +276,8 @@ jQuery.fn.motionCaptcha || (function($) {
 		actionId: '#mc-action',     // The ID of the input containing the form action
 		divId: '#mc',               // If you use an ID other than '#mc' for the placeholder, pass it in here
 		canvasId: '#mc-canvas',     // The ID of the MotionCAPTCHA canvas element
-		submitId: false,            // If your form has multiple submit buttons, give the ID of the main one here
+		submitId: false,           // If your form has multiple submit buttons, give the ID of the main one here
+		btnRefresh: false,           // If you want to add refresh button, add the button ID
 		cssClass: '.mc-active',     // This CSS class is applied to the form, when the plugin is active
 	
 		// An array of shape names that you want MotionCAPTCHA to use:
