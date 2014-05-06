@@ -84,12 +84,12 @@ In my book, all of these people are ace - I just borrowed from them and spliced 
 
 6. Call the plugin on the form element. If you used any other ID than 'mc-action' for the hidden input, you'll just need to pass it to the plugin, like this:
 
-        $('#form-id').motioncaptcha({
+        $('#form-id').motionCaptcha({
             action: '#fairly-unique-id'
         });
         
         // Or, if you just used 'mc-action' as the hidden input's ID:
-        $('#form-id').motioncaptcha();
+        $('#form-id').motionCaptcha();
 
 7. Other options are available (defaults are shown):
 
